@@ -1,6 +1,6 @@
 {
   "name": "webgl-stage",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Light wrapper around the webgl api to run simple shaders",
   "keywords": [],
   "author": "Tim Morris <timthewebguy@gmail.com>",
