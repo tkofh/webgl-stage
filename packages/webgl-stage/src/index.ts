@@ -12,4 +12,6 @@ export type {
   StageUniforms,
   StageConfig,
   Stage,
+  UpdateAttributeEventData,
+  UpdateUniformEventData,
 } from './types'
