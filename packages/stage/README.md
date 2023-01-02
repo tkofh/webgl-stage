@@ -1,1 +1,1 @@
-# `webgl-tools`
+# `@webgl-tools/stage`
