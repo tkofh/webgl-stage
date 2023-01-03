@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/stage@0.1.0...@webgl-tools/stage@0.2.0) (2023-01-03)
+
+### Features
+
+- **stage:** remove int attribute type, as gl int type cannot be an attribute ([8d94531](https://github.com/tkofh/webgl-tools/commit/8d94531056c2624ca4e8b5dd44e0d33f2a3ba606))
+
 # 0.1.0 (2023-01-02)
 
 ### Bug Fixes
