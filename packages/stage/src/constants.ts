@@ -1,8 +1,3 @@
-export const stageAttributeTypeToGLConst = {
-  float: 'FLOAT',
-  int: 'INT',
-} as const
-
 export const stageUniformTypeToGLMethod = {
   float: 'uniform1fv',
   vec2: 'uniform2fv',

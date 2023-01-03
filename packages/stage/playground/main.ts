@@ -61,7 +61,7 @@ window.addEventListener(
       // eslint-disable-next-line no-console
       console.log(gl)
     })
-    stage.on('resize', data => {
+    stage.on('resize', (data) => {
       // eslint-disable-next-line no-console
       console.log(data)
     })

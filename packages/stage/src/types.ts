@@ -24,22 +24,14 @@ export interface StageElements {
   type: StageElementType
 }
 
-export type StageAttribute = {
+export interface StageAttribute {
   /**
    * @default DYNAMIC_DRAW
    */
   usage?: StageUsage
   size: number
-} & (
-  | {
-      type: 'float'
-      data: Float32Array
-    }
-  | {
-      type: 'int'
-      data: Int32Array
-    }
-)
+  data: Float32Array
+}
 
 export type StageUniform =
   | {

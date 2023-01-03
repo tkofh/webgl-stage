@@ -10,7 +10,7 @@ import type {
   StageUniform,
   StageUniforms,
 } from './types'
-import { stageAttributeTypeToGLConst, stageUniformTypeToGLMethod } from './constants'
+import { stageUniformTypeToGLMethod } from './constants'
 
 export const createStage = <TAttributes extends StageAttributes, TUniforms extends StageUniforms>(
   config: StageConfig<TAttributes, TUniforms>
@@ -207,14 +207,7 @@ export const createStage = <TAttributes extends StageAttributes, TUniforms exten
     for (const [attributeName, attributeConfig] of attributes.entries()) {
       const { buffer, location } = attributeInfo.get(attributeName)!
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-      gl.vertexAttribPointer(
-        location,
-        attributeConfig.size,
-        gl[stageAttributeTypeToGLConst[attributeConfig.type]],
-        false,
-        0,
-        0
-      )
+      gl.vertexAttribPointer(location, attributeConfig.size, gl.FLOAT, false, 0, 0)
     }
 
     emitter.emit('render', gl)
