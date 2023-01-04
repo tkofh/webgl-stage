@@ -182,7 +182,7 @@ export const createStage = <TAttributes extends StageAttributes, TUniforms exten
     canvas.width = width * pixelRatio
     canvas.height = height * pixelRatio
 
-    gl.viewport(0, 0, canvas.width * pixelRatio, canvas.height * pixelRatio)
+    gl.viewport(0, 0, canvas.width, canvas.height)
 
     emitter.emit('resize', { width, height, pixelRatio })
   }
