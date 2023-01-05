@@ -1,0 +1,45 @@
+{
+  "name": "@webgl-tools/glsl-nodes",
+  "version": "0.0.0",
+  "description": "Node and layer based library for composing glsl programs",
+  "keywords": [],
+  "author": "Tim Morris <timthewebguy@gmail.com>",
+  "homepage": "https://github.com/tkofh/webgl-tools/tree/main/packages/stage#readme",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkofh/webgl-tools.git"
+  },
+  "scripts": {
+    "test": "vitest",
+    "prepublish": "unbuild"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@vitest/ui": "^0.26.3",
+    "outdent": "^0.8.0",
+    "unbuild": "^0.9.4",
+    "vitest": "^0.26.3"
+  },
+  "dependencies": {
+    "scule": "^1.0.0"
+  }
+}
