@@ -60,6 +60,7 @@ export {
   variable,
   varying,
 } from './nodes'
+export type { Node, DataNode, OutputNode, DataType, OutputType } from './nodes'
 export { createProgram } from './createProgram'
 export { createWriter } from './writer'
 export { createNamer } from './namer'
