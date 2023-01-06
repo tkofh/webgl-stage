@@ -62,5 +62,8 @@ export {
 } from './nodes'
 export type { Node, DataNode, OutputNode, DataType, OutputType } from './nodes'
 export { createProgram } from './createProgram'
+export type { ProgramOptions } from './createProgram'
 export { createWriter } from './writer'
+export type { Writer } from './writer'
 export { createNamer } from './namer'
+export type { Namer } from './namer'

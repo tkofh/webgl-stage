@@ -9,7 +9,7 @@ type ProgramSetupResult = {
 
 type ProgramSetup = (namer: Namer) => ProgramSetupResult
 
-interface ProgramOptions {
+export interface ProgramOptions {
   precision?: 'lowp' | 'mediump' | 'highp'
 }
 
