@@ -3,21 +3,23 @@ import { createNamer } from './namer'
 import type { Node, OutputNode, OutputType } from './nodes/types'
 import { createWriter } from './writer'
 
-type ProgramSetup = (namer: Namer) => {
+type ProgramSetupResult = {
   [TOutput in OutputType]: OutputNode<TOutput>
 }
+
+type ProgramSetup = (namer: Namer) => ProgramSetupResult
 
 interface ProgramOptions {
   precision?: 'lowp' | 'mediump' | 'highp'
 }
 
-export const createProgram = (setup: ProgramSetup, options?: ProgramOptions) => {
+export const createProgram = (setup: ProgramSetup | ProgramSetupResult, options?: ProgramOptions) => {
   const vertex = createWriter()
   const fragment = createWriter()
 
   const namer = createNamer()
 
-  const result = setup(namer)
+  const result = typeof setup === 'function' ? setup(namer) : setup
 
   const vertexWritten = new Set<Node>()
   const vertexQueue: Node[] = [result.gl_Position]
