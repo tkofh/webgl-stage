@@ -1,4 +1,4 @@
-import type { OutputType, OutputNode, DataNode, DataType, StorageType } from "./types";
+import type { OutputType, OutputNode, DataNode, DataType, StorageType } from './types'
 
 interface OutputToAllowedStorage {
   ['gl_Position']: Exclude<StorageType, 'varying'>

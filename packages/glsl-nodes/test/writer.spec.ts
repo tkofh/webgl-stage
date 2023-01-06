@@ -18,8 +18,6 @@ describe('writer', () => {
     vertexWriter.addGlobal(`attribute vec2 a_uv;`)
     vertexWriter.addGlobal(`attribute vec3 a_pos;`)
 
-
-
     const vertexShader = vertexWriter.compile()
     const fragmentShader = fragmentWriter.compile()
 

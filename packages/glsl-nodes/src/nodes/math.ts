@@ -1,19 +1,62 @@
 import type { DataType, DataNode } from './types'
 
-/* need to store all the storage types of the terms so that we can tell if an attribute exists in the dependencies for a fragment shader */
+export const add = <TValueX extends DataNode<DataType>, TValueY extends DataNode<TValueX['type']>>(
+  x: TValueX,
+  y: TValueY
+): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
+  storage: 'literal',
+  type: x.type,
+  dependencies: [x, y],
+  write: null,
+  expression: `${x.expression} + ${y.expression}`,
+})
 
-export const add = <TFirst extends DataNode<DataType>, TTerms extends DataNode<TFirst['type']>[]>(
-  first: TFirst,
-  ...terms: TTerms
-): DataNode<TFirst['type'], 'literal' | TFirst['storage'] | TTerms[number]['storage']> => {
-  if (terms.length === 0) {
-    return first
-  }
-  return {
-    storage: 'literal',
-    type: first.type,
-    dependencies: [first, ...terms],
-    write: null,
-    expression: `${first.expression} + ${terms.map((term) => term.expression).join(' + ')}`,
-  }
-}
+export const subtract = <
+  TValueX extends DataNode<DataType>,
+  TValueY extends DataNode<TValueX['type']>
+>(
+  x: TValueX,
+  y: TValueY
+): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
+  storage: 'literal',
+  type: x.type,
+  dependencies: [x, y],
+  write: null,
+  expression: `${x.expression} - ${y.expression}`,
+})
+export const multiply = <
+  TValueX extends DataNode<DataType>,
+  TValueY extends DataNode<
+    | TValueX['type']
+    | (TValueX['type'] extends 'vec2'
+        ? 'mat2'
+        : TValueX['type'] extends 'vec3'
+        ? 'mat3'
+        : TValueX['type'] extends 'vec4'
+        ? 'mat4'
+        : never)
+  >
+>(
+  x: TValueX,
+  y: TValueY
+): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
+  storage: 'literal',
+  type: x.type,
+  dependencies: [x, y],
+  write: null,
+  expression: `${x.expression} * ${y.expression}`,
+})
+
+export const divide = <
+  TValueX extends DataNode<DataType>,
+  TValueY extends DataNode<TValueX['type']>
+>(
+  x: TValueX,
+  y: TValueY
+): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
+  storage: 'literal',
+  type: x.type,
+  dependencies: [x, y],
+  write: null,
+  expression: `${x.expression} / ${y.expression}`,
+})
