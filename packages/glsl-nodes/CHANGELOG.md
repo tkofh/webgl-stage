@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.3.0...@webgl-tools/glsl-nodes@0.4.0) (2023-01-06)
+
+### Features
+
+- **glsl-nodes:** export writer, namer, and program types ([21324c8](https://github.com/tkofh/webgl-tools/commit/21324c813fdb864c2fbc58a24b5c0e2fd6824cbc))
+
 # [0.3.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.2.0...@webgl-tools/glsl-nodes@0.3.0) (2023-01-06)
 
 ### Features
