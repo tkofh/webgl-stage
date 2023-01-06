@@ -21,7 +21,7 @@ export { output } from './outputs'
 export { raw } from './raw'
 export { texture2D, textureCube } from './texture'
 export { acos, asin, atan, cos, degrees, radians, sin, tan } from './trigonometry'
-export type { Node, DataNode, OutputNode, DataType, OutputType } from './types'
+export type { Node, DataNode, OutputNode, DataType, OutputType, StorageType } from './types'
 export {
   all,
   any,
