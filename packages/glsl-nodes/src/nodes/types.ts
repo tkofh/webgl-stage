@@ -125,6 +125,13 @@ export interface DataTypeLiteralParams {
   samplerCube: []
 }
 
+export interface ArrayNode<TDataType extends DataType, TStorage extends StorageType = StorageType> extends Node {
+  storage: TStorage
+  dataType: TDataType
+  length: number
+  expression: string
+}
+
 export interface NumberVecToBoolVec {
   vec2: 'bvec2'
   vec3: 'bvec3'
