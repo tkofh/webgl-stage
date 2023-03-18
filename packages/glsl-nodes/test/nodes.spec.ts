@@ -13,8 +13,8 @@ import {
   add,
   unfiormArray,
   dot,
+  cast,
 } from '../src'
-import { cast } from '../src/nodes/data'
 import { accessArray } from '../src/nodes'
 
 describe('nodes', () => {

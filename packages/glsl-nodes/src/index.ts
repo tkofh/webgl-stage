@@ -1,6 +1,7 @@
 export {
   abs,
   access,
+  accessArray,
   acos,
   add,
   all,
@@ -9,6 +10,7 @@ export {
   atan,
   attribute,
   attributeArray,
+  cast,
   ceil,
   clamp,
   constant,

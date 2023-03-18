@@ -21,7 +21,17 @@ export {
   smoothstep,
   step,
 } from './common'
-export { access, attribute, constant, literal, swizzle, uniform, variable, varying } from './data'
+export {
+  access,
+  attribute,
+  cast,
+  constant,
+  literal,
+  swizzle,
+  uniform,
+  variable,
+  varying,
+} from './data'
 export { exp, exp2, inversesqrt, log, log2, pow, sqrt } from './exponential'
 export { cross, distance, dot, length, normalize, reflect, refract } from './geometry'
 export { add, divide, multiply, subtract } from './math'
