@@ -54,40 +54,50 @@ export const variable = <
   value: TValue
 ): DataNode<
   TType,
-  'local' | (TValue extends DataNode<TType, infer TStorage> ? TStorage : never)
-> => ({
-  type,
-  storage: 'local',
-  expression: name,
-  dependencies: Array.isArray(value) ? [] : [value],
-  write: ({ addMainBody }) => {
-    addMainBody(
-      `${type} ${name} = ${
-        Array.isArray(value)
-          ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (literal<TType, any>(type, value) as DataNode<TType, 'literal'>).expression
-          : value.expression
-      };`
-    )
-  },
-})
+  'local' | (TValue extends DataNode<TType, infer TStorage> ? TStorage : 'literal')
+> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const valueNode = (Array.isArray(value) ? literal<TType, any>(type, value) : value) as DataNode<
+    TType,
+    'literal'
+  >
+  return {
+    type,
+    storage: 'local',
+    expression: name,
+    dependencies: [valueNode],
+    write: ({ addMainBody }) => {
+      addMainBody(`${type} ${name} = ${valueNode.expression};`)
+    },
+  }
+}
 
-export const constant = <TType extends DataType, TValue extends DataNode<TType>>(
+export const constant = <
+  TType extends DataType,
+  TValue extends DataNode<TType> | DataTypeLiteralParams[TType]
+>(
   type: TType,
   name: string,
   value: TValue
 ): DataNode<
   TType,
-  'local' | (TValue extends DataNode<TType, infer TStorage> ? TStorage : never)
-> => ({
-  type,
-  storage: 'local',
-  expression: name,
-  dependencies: [value],
-  write: ({ addGlobal }) => {
-    addGlobal(`const ${type} ${name} = ${value.expression};`)
-  },
-})
+  'local' | (TValue extends DataNode<TType, infer TStorage> ? TStorage : 'literal')
+> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const valueNode = (Array.isArray(value) ? literal<TType, any>(type, value) : value) as DataNode<
+    TType,
+    'literal'
+  >
+  return {
+    type,
+    storage: 'local',
+    expression: name,
+    dependencies: [valueNode],
+    write: ({ addGlobal }) => {
+      addGlobal(`const ${type} ${name} = ${valueNode.expression};`)
+    },
+  }
+}
 
 export const literal = <TType extends DataType, TValues extends DataTypeLiteralParams[TType]>(
   type: TType,
