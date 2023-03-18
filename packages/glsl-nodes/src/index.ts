@@ -1,6 +1,7 @@
 export {
   abs,
   access,
+  accessArray,
   acos,
   add,
   all,
@@ -8,9 +9,12 @@ export {
   asin,
   atan,
   attribute,
+  attributeArray,
+  cast,
   ceil,
   clamp,
   constant,
+  constantArray,
   cos,
   cross,
   degrees,
@@ -29,6 +33,7 @@ export {
   lessThan,
   lessThanEqual,
   literal,
+  literalArray,
   log,
   log2,
   matrixCompMult,
@@ -56,11 +61,22 @@ export {
   tan,
   texture2D,
   textureCube,
+  unfiormArray,
   uniform,
   variable,
+  variableArray,
   varying,
+  varyingArray,
 } from './nodes'
-export type { Node, DataNode, OutputNode, DataType, OutputType, StorageType } from './nodes'
+export type {
+  ArrayNode,
+  DataNode,
+  DataType,
+  Node,
+  OutputNode,
+  OutputType,
+  StorageType,
+} from './nodes'
 export { createProgram } from './createProgram'
 export type { ProgramOptions } from './createProgram'
 export { createWriter } from './writer'

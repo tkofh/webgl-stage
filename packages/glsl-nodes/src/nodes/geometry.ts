@@ -30,9 +30,9 @@ export const dot = <
 >(
   p0: TPoint0,
   p1: TPoint1
-): DataNode<TPoint0['type'], 'literal' | TPoint0['storage'] | TPoint1['storage']> => ({
+): DataNode<'float', 'literal' | TPoint0['storage'] | TPoint1['storage']> => ({
   storage: 'literal',
-  type: p0.type,
+  type: 'float',
   dependencies: [p0, p1],
   write: null,
   expression: `dot(${p0.expression}, ${p1.expression})`,
