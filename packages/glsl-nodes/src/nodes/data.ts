@@ -45,7 +45,10 @@ export const varying = <TType extends DataType>(
   },
 })
 
-export const variable = <TType extends DataType, TValue extends DataNode<TType>>(
+export const variable = <
+  TType extends DataType,
+  TValue extends DataNode<TType> | DataTypeLiteralParams[TType]
+>(
   type: TType,
   name: string,
   value: TValue
@@ -56,9 +59,16 @@ export const variable = <TType extends DataType, TValue extends DataNode<TType>>
   type,
   storage: 'local',
   expression: name,
-  dependencies: [value],
+  dependencies: Array.isArray(value) ? [] : [value],
   write: ({ addMainBody }) => {
-    addMainBody(`${type} ${name} = ${value.expression};`)
+    addMainBody(
+      `${type} ${name} = ${
+        Array.isArray(value)
+          ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (literal<TType, any>(type, value) as DataNode<TType, 'literal'>).expression
+          : value.expression
+      };`
+    )
   },
 })
 
@@ -103,7 +113,7 @@ export const literal = <TType extends DataType, TValues extends DataTypeLiteralP
     write: null,
     storage: 'literal',
     expression:
-      valueExpressions.length === 1
+      type === 'bool' || type === 'int' || type === 'float'
         ? valueExpressions[0]
         : `${type}(${valueExpressions.join(', ')})`,
   }
@@ -111,11 +121,11 @@ export const literal = <TType extends DataType, TValues extends DataTypeLiteralP
 
 export const cast = <
   TCast extends 'bool' | 'float' | 'int',
-  TValue extends DataNode<Exclude<TCast, 'bool' | 'float' | 'int'>>
+  TValue extends DataNode<Exclude<'bool' | 'float' | 'int', TCast>>
 >(
   value: TValue,
   cast: TCast
-): DataNode<TCast, 'literal' & TValue['storage']> => ({
+): DataNode<TCast, 'literal' | TValue['storage']> => ({
   type: cast,
   dependencies: [value],
   write: null,
