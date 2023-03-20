@@ -1,5 +1,5 @@
 import { literal } from './data'
-import type { ArrayNode, DataNode, DataType, DataTypeLiteralParams, StorageType } from './types'
+import type { ArrayNode, DataNode, DataType, DataTypeLiteralParams } from './types'
 
 export const attributeArray = <TDataType extends DataType>(
   dataType: TDataType,
