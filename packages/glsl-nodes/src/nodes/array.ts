@@ -122,11 +122,11 @@ export const literalArray = <
 
 export const accessArray = <TValue extends ArrayNode<DataType>>(
   value: TValue,
-  access: DataNode<'int', StorageType>
+  access: DataNode<'int'>
 ): DataNode<TValue['dataType'], 'literal' | TValue['storage']> => ({
   type: value.dataType,
   storage: 'literal',
-  dependencies: [value],
+  dependencies: [value, access],
   write: null,
   expression: `${value.expression}[${access.expression}]`,
 })
