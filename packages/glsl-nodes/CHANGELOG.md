@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.6.0...@webgl-tools/glsl-nodes@0.6.1) (2023-03-20)
+
+### Bug Fixes
+
+- **@webgl-tools/glsl-nodes:** include access in accessArray deps ([3615b9d](https://github.com/tkofh/webgl-tools/commit/3615b9d26424619919bd3bc85606c2129e11ab92))
+
 # [0.6.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.5.0...@webgl-tools/glsl-nodes@0.6.0) (2023-03-19)
 
 ### Features
