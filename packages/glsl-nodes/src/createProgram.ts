@@ -13,7 +13,10 @@ export interface ProgramOptions {
   precision?: 'lowp' | 'mediump' | 'highp'
 }
 
-export const createProgram = (setup: ProgramSetup | ProgramSetupResult, options?: ProgramOptions) => {
+export const createProgram = (
+  setup: ProgramSetup | ProgramSetupResult,
+  options?: ProgramOptions
+) => {
   const vertex = createWriter()
   const fragment = createWriter()
 
@@ -29,7 +32,7 @@ export const createProgram = (setup: ProgramSetup | ProgramSetupResult, options?
       vertexWritten.add(current)
       current.write?.(vertex)
     }
-    vertexQueue.push(...current.dependencies)
+    vertexQueue.unshift(...current.dependencies)
   }
 
   const fragmentWritten = new Set<Node>()
@@ -40,7 +43,7 @@ export const createProgram = (setup: ProgramSetup | ProgramSetupResult, options?
       fragmentWritten.add(current)
       current.write?.(fragment)
     }
-    fragmentQueue.push(...current.dependencies)
+    fragmentQueue.unshift(...current.dependencies)
   }
 
   fragment.addGlobal(`precision ${options?.precision ?? 'mediump'} float;`)
