@@ -27,7 +27,7 @@ export const unfiormArray = <TDataType extends DataType>(
   expression: name,
   dependencies: [],
   write: ({ addGlobal }) => {
-    addGlobal(`uniform ${dataType} ${name}[${length}`)
+    addGlobal(`uniform ${dataType} ${name}[${length}];`)
   },
 })
 
@@ -42,7 +42,7 @@ export const varyingArray = <TDataType extends DataType>(
   expression: name,
   dependencies: [],
   write: ({ addGlobal }) => {
-    addGlobal(`varying ${dataType} ${name}[${length}]`)
+    addGlobal(`varying ${dataType} ${name}[${length}];`)
   },
 })
 
@@ -57,7 +57,7 @@ export const variableArray = <TDataType extends DataType, TValue extends ArrayNo
   expression: name,
   dependencies: [value],
   write: ({ addMainBody }) => {
-    addMainBody(`${dataType} ${name}[${length}] = ${value.expression}`)
+    addMainBody(`${dataType} ${name}[${length}] = ${value.expression};`)
   },
 })
 
