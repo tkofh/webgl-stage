@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.6.1...@webgl-tools/glsl-nodes@0.6.2) (2023-03-24)
+
+### Bug Fixes
+
+- dependency order ([8518acb](https://github.com/tkofh/webgl-tools/commit/8518acb0382754bb3c32fd8dc4537eefd63541d1))
+- syntax errors ([4e4cdb3](https://github.com/tkofh/webgl-tools/commit/4e4cdb31a387c992be74785114dcf8428f3906ea))
+
 ## [0.6.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.6.0...@webgl-tools/glsl-nodes@0.6.1) (2023-03-20)
 
 ### Bug Fixes
