@@ -61,7 +61,7 @@ export {
   tan,
   texture2D,
   textureCube,
-  unfiormArray,
+  uniformArray,
   uniform,
   variable,
   variableArray,

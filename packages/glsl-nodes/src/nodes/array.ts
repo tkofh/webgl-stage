@@ -16,7 +16,7 @@ export const attributeArray = <TDataType extends DataType>(
   },
 })
 
-export const unfiormArray = <TDataType extends DataType>(
+export const uniformArray = <TDataType extends DataType>(
   dataType: TDataType,
   name: string,
   length: number

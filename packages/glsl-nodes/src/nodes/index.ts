@@ -3,7 +3,7 @@ export {
   attributeArray,
   constantArray,
   literalArray,
-  unfiormArray,
+  uniformArray,
   variableArray,
   varyingArray,
 } from './array'

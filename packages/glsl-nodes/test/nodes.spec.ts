@@ -11,7 +11,7 @@ import {
   pow,
   multiply,
   add,
-  unfiormArray,
+  uniformArray,
   dot,
   cast,
 } from '../src'
@@ -24,7 +24,7 @@ describe('nodes', () => {
     const controlPointCount = { x: 3, y: 3 }
 
     const { vertex, fragment } = createProgram((namer) => {
-      const controlPointPositions = unfiormArray(
+      const controlPointPositions = uniformArray(
         'vec2',
         namer.uniform('controlPoints'),
         controlPointCount.x * controlPointCount.y
