@@ -49,7 +49,7 @@ export const createProgram = (
   fragment.addGlobal(`precision ${options?.precision ?? 'mediump'} float;`)
 
   return {
-    vertex: vertex.compile(),
-    fragment: fragment.compile(),
+    vertexShader: vertex.compile(),
+    fragmentShader: fragment.compile(),
   }
 }
