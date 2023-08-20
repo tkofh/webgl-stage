@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.6.3...@webgl-tools/glsl-nodes@0.7.0) (2023-08-20)
+
+### Features
+
+- **@webgl-tools/glsl-nodes:** rename exports to match stage ([fc0a112](https://github.com/tkofh/webgl-tools/commit/fc0a112bab6cfeb98eec388a8adaad148d6504a9))
+
 ## [0.6.3](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.6.2...@webgl-tools/glsl-nodes@0.6.3) (2023-04-24)
 
 ### Bug Fixes
