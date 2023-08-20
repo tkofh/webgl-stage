@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.7.0...@webgl-tools/glsl-nodes@0.7.1) (2023-08-20)
+
+### Features
+
+- **@webgl-tools/glsl-nodes:** do not use double underscores ([502d915](https://github.com/tkofh/webgl-tools/commit/502d915901c1505a9669899745d980d97bbc6714))
+
 # [0.7.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.6.3...@webgl-tools/glsl-nodes@0.7.0) (2023-08-20)
 
 ### Features
