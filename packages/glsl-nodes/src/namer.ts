@@ -15,7 +15,7 @@ export const createNamer = (): Namer => {
   const getUniqueName: GetUniqueName = (name) => {
     const instance = uniqueNames.get(name) ?? 0
     uniqueNames.set(name, instance + 1)
-    return `${name}__${instance}`
+    return `${name}_${instance}`
   }
 
   const variable: GetUniqueName = (name) =>
