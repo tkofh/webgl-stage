@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.7.1...@webgl-tools/glsl-nodes@0.8.0) (2023-11-05)
+
+### Features
+
+- allow assigning to varyings ([6f73d99](https://github.com/tkofh/webgl-tools/commit/6f73d995f8135f0bbfa8f72cc6add654154cc05f))
+
 ## [0.7.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.7.0...@webgl-tools/glsl-nodes@0.7.1) (2023-08-20)
 
 ### Features
