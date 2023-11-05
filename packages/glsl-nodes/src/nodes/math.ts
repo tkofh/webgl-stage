@@ -29,11 +29,11 @@ export const multiply = <
   TValueY extends DataNode<
     | TValueX['type']
     | (TValueX['type'] extends 'vec2'
-        ? 'mat2'
+        ? 'mat2' | 'float'
         : TValueX['type'] extends 'vec3'
-        ? 'mat3'
+        ? 'mat3' | 'float'
         : TValueX['type'] extends 'vec4'
-        ? 'mat4'
+        ? 'mat4' | 'float'
         : never)
   >
 >(
