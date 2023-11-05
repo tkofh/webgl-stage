@@ -14,8 +14,10 @@ export const attribute = <TType extends DataType>(
   type,
   expression: name,
   dependencies: [],
-  write: ({ addGlobal }) => {
-    addGlobal(`attribute ${type} ${name};`)
+  write: ({ addGlobal, mode }) => {
+    if (mode === 'vertex') {
+      addGlobal(`attribute ${type} ${name};`)
+    }
   },
 })
 
@@ -117,7 +119,7 @@ export const literal = <TType extends DataType, TValues extends DataTypeLiteralP
     if (typeof value === 'object') {
       dependencies.push(value)
       valueExpressions.push(value.expression)
-    } else {
+    } else if (value != null) {
       valueExpressions.push(value)
     }
   }

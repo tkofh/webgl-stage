@@ -55,74 +55,82 @@ export interface DataTypeLiteralParams {
   float: [string]
   int: [string]
   bool: [string]
-  vec2: [DataNode<'float'> | string, DataNode<'float'> | string] | [DataNode<'vec2'>]
+  vec2: [DataNode<'float'> | string, (DataNode<'float'> | string)?] | [DataNode<'vec2'>]
   vec3:
-    | [DataNode<'float'> | string, DataNode<'float'> | string, DataNode<'float'> | string]
+    | [DataNode<'float'> | string, (DataNode<'float'> | string)?, (DataNode<'float'> | string)?]
     | [DataNode<'float'> | string, DataNode<'vec2'>]
-    | [DataNode<'vec2'>, DataNode<'float'> | string]
+    | [DataNode<'vec2'>, (DataNode<'float'> | string)?]
   vec4:
     | [
         DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?
       ]
-    | [DataNode<'float'> | string, DataNode<'float'> | string, DataNode<'vec2'>]
-    | [DataNode<'float'> | string, DataNode<'vec2'>, DataNode<'float'> | string]
-    | [DataNode<'vec2'>, DataNode<'float'> | string, DataNode<'float'> | string]
-    | [DataNode<'vec2'>, DataNode<'vec2'>]
-    | [DataNode<'vec3'>, DataNode<'float'> | string]
-    | [DataNode<'float'> | string, DataNode<'vec3'>]
-  ivec2: [DataNode<'float'> | string, DataNode<'float'> | string] | [DataNode<'ivec2'>]
+    | [DataNode<'float'> | string, (DataNode<'float'> | string)?, DataNode<'vec2'>?]
+    | [DataNode<'float'> | string, DataNode<'vec2'>?, (DataNode<'float'> | string)?]
+    | [DataNode<'vec2'>, (DataNode<'float'> | string)?, (DataNode<'float'> | string)?]
+    | [DataNode<'vec2'>, DataNode<'vec2'>?]
+    | [DataNode<'vec3'>, (DataNode<'float'> | string)?]
+    | [DataNode<'float'> | string, DataNode<'vec3'>?]
+  ivec2: [DataNode<'float'> | string, (DataNode<'float'> | string)?] | [DataNode<'ivec2'>]
   ivec3:
-    | [DataNode<'float'> | string, DataNode<'float'> | string, DataNode<'float'> | string]
-    | [DataNode<'float'> | string, DataNode<'ivec2'>]
-    | [DataNode<'ivec2'>, DataNode<'float'> | string]
+    | [DataNode<'float'> | string, (DataNode<'float'> | string)?, (DataNode<'float'> | string)?]
+    | [DataNode<'float'> | string, DataNode<'ivec2'>?]
+    | [DataNode<'ivec2'>, (DataNode<'float'> | string)?]
   ivec4:
     | [
         DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?
       ]
-    | [DataNode<'float'> | string, DataNode<'float'> | string, DataNode<'ivec2'>]
-    | [DataNode<'float'> | string, DataNode<'ivec2'>, DataNode<'float'> | string]
-    | [DataNode<'ivec2'>, DataNode<'float'> | string, DataNode<'float'> | string]
-    | [DataNode<'ivec2'>, DataNode<'ivec2'>]
-    | [DataNode<'ivec3'>, DataNode<'float'> | string]
-    | [DataNode<'float'> | string, DataNode<'ivec3'>]
-  bvec2: [DataNode<'float'> | string, DataNode<'float'> | string] | [DataNode<'bvec2'>]
+    | [DataNode<'float'> | string, (DataNode<'float'> | string)?, DataNode<'ivec2'>?]
+    | [DataNode<'float'> | string, DataNode<'ivec2'>?, (DataNode<'float'> | string)?]
+    | [DataNode<'ivec2'>, (DataNode<'float'> | string)?, (DataNode<'float'> | string)?]
+    | [DataNode<'ivec2'>, DataNode<'ivec2'>?]
+    | [DataNode<'ivec3'>, (DataNode<'float'> | string)?]
+    | [DataNode<'float'> | string, DataNode<'ivec3'>?]
+  bvec2: [DataNode<'float'> | string, (DataNode<'float'> | string)?] | [DataNode<'bvec2'>]
   bvec3:
-    | [DataNode<'float'> | string, DataNode<'float'> | string, DataNode<'float'> | string]
-    | [DataNode<'float'> | string, DataNode<'bvec2'>]
-    | [DataNode<'bvec2'>, DataNode<'float'> | string]
+    | [DataNode<'float'> | string, (DataNode<'float'> | string)?, (DataNode<'float'> | string)?]
+    | [DataNode<'float'> | string, DataNode<'bvec2'>?]
+    | [DataNode<'bvec2'>, (DataNode<'float'> | string)?]
   bvec4:
     | [
         DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?
       ]
-    | [DataNode<'float'> | string, DataNode<'float'> | string, DataNode<'bvec2'>]
-    | [DataNode<'float'> | string, DataNode<'bvec2'>, DataNode<'float'> | string]
-    | [DataNode<'bvec2'>, DataNode<'float'> | string, DataNode<'float'> | string]
-    | [DataNode<'bvec2'>, DataNode<'bvec2'>]
-    | [DataNode<'bvec3'>, DataNode<'float'> | string]
-    | [DataNode<'float'> | string, DataNode<'bvec3'>]
+    | [DataNode<'float'> | string, (DataNode<'float'> | string)?, DataNode<'bvec2'>?]
+    | [DataNode<'float'> | string, DataNode<'bvec2'>?, (DataNode<'float'> | string)?]
+    | [DataNode<'bvec2'>, (DataNode<'float'> | string)?, (DataNode<'float'> | string)?]
+    | [DataNode<'bvec2'>, DataNode<'bvec2'>?]
+    | [DataNode<'bvec3'>, (DataNode<'float'> | string)?]
+    | [DataNode<'float'> | string, DataNode<'bvec3'>?]
   mat2:
     | [
         DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string,
-        DataNode<'float'> | string
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?,
+        (DataNode<'float'> | string)?
       ]
-    | [DataNode<'float'> | string, DataNode<'float'> | string, DataNode<'vec2'>]
-    | [DataNode<'float'> | string, DataNode<'vec2'>, DataNode<'float'> | string]
-    | [DataNode<'vec2'>, DataNode<'float'> | string, DataNode<'float'> | string]
-    | [DataNode<'vec3'>, DataNode<'float'> | string]
-    | [DataNode<'float'> | string, DataNode<'vec3'>]
-  mat3: (DataNode<'float'> | DataNode<'vec2'> | DataNode<'vec3'> | DataNode<'vec4'> | string)[]
-  mat4: (DataNode<'float'> | DataNode<'vec2'> | DataNode<'vec3'> | DataNode<'vec4'> | string)[]
+    | [DataNode<'float'> | string, (DataNode<'float'> | string)?, DataNode<'vec2'>?]
+    | [DataNode<'float'> | string, DataNode<'vec2'>?, (DataNode<'float'> | string)?]
+    | [DataNode<'vec2'>, (DataNode<'float'> | string)?, (DataNode<'float'> | string)?]
+    | [DataNode<'vec3'>, (DataNode<'float'> | string)?]
+    | [DataNode<'float'> | string, DataNode<'vec3'>?]
+
+  // if someone feels like typing all this out be my guest lol
+  mat3: [
+    DataNode<'float'> | DataNode<'vec2'> | DataNode<'vec3'> | DataNode<'vec4'> | string,
+    ...(DataNode<'float'> | DataNode<'vec2'> | DataNode<'vec3'> | DataNode<'vec4'> | string)[]
+  ]
+  mat4: [
+    DataNode<'float'> | DataNode<'vec2'> | DataNode<'vec3'> | DataNode<'vec4'> | string,
+    ...(DataNode<'float'> | DataNode<'vec2'> | DataNode<'vec3'> | DataNode<'vec4'> | string)[]
+  ]
   sampler2d: []
   samplerCube: []
 }

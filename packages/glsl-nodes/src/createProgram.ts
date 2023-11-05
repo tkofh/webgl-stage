@@ -37,19 +37,13 @@ export const createProgram = (
     if (!fragmentWritten.has(current)) {
       fragmentWritten.add(current)
 
-      let write = true
-
       if (isDataNode(current)) {
         if (current.storage === 'varying') {
           vertexQueue.push(current)
-        } else if (current.storage === 'attribute') {
-          write = false
         }
       }
 
-      if (write) {
-        current.write?.(fragment)
-      }
+      current.write?.(fragment)
     }
     fragmentQueue.unshift(...current.dependencies)
   }
