@@ -4,8 +4,8 @@ import { createWriter } from '../src/writer'
 
 describe('writer', () => {
   test('it writes', ({ expect }) => {
-    const vertexWriter = createWriter()
-    const fragmentWriter = createWriter()
+    const vertexWriter = createWriter('vertex')
+    const fragmentWriter = createWriter('fragment')
 
     fragmentWriter.addMainBody(`gl_FragColor = vec4(v_uv, 0.5, 1.0);`)
 

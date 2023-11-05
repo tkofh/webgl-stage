@@ -42,6 +42,8 @@ export type AccessableDataType =
 
 export type StorageType = 'attribute' | 'varying' | 'uniform' | 'local' | 'literal'
 
+export type WritableStorageType = 'varying' | 'local'
+
 export interface DataNode<TType extends DataType, TStorage extends StorageType = StorageType>
   extends Node {
   storage: TStorage
@@ -125,7 +127,8 @@ export interface DataTypeLiteralParams {
   samplerCube: []
 }
 
-export interface ArrayNode<TDataType extends DataType, TStorage extends StorageType = StorageType> extends Node {
+export interface ArrayNode<TDataType extends DataType, TStorage extends StorageType = StorageType>
+  extends Node {
   storage: TStorage
   dataType: TDataType
   length: number

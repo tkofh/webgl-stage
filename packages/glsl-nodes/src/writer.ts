@@ -1,4 +1,5 @@
 export interface Writer {
+  mode: 'vertex' | 'fragment'
   addGlobal: (glsl: string) => void
   // addFunction: (name: string, returnType: string, parameters: string) => void
   // addFunctionBody: (functionName: string, glsl: string) => void
@@ -6,7 +7,7 @@ export interface Writer {
   compile: () => string
 }
 
-export const createWriter = (): Writer => {
+export const createWriter = (mode: 'vertex' | 'fragment'): Writer => {
   const globals: string[] = []
 
   // const functions = new Map<string, string[]>()
@@ -15,6 +16,7 @@ export const createWriter = (): Writer => {
   const mainBody: string[] = []
 
   return {
+    mode,
     addGlobal: (glsl) => {
       globals.unshift(glsl)
     },

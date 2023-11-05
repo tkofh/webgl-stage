@@ -34,14 +34,19 @@ export const uniform = <TType extends DataType>(
 
 export const varying = <TType extends DataType>(
   type: TType,
-  name: string
+  name: string,
+  value: DataNode<TType>
 ): DataNode<TType, 'varying'> => ({
   storage: 'varying',
   type,
   expression: name,
-  dependencies: [],
-  write: ({ addGlobal }) => {
+  dependencies: [value],
+  write: ({ addGlobal, addMainBody, mode }) => {
     addGlobal(`varying ${type} ${name};`)
+
+    if (mode === 'vertex') {
+      addMainBody(`${name} = ${value.expression};`)
+    }
   },
 })
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { describe, test } from 'vitest'
-import { createProgram } from '../src/createProgram'
 import {
+  accessArray,
   attribute,
   constant,
   literal,
@@ -14,8 +14,9 @@ import {
   uniformArray,
   dot,
   cast,
+  varying,
+  createProgram,
 } from '../src'
-import { accessArray } from '../src/nodes'
 
 describe('nodes', () => {
   test('it works', ({ expect }) => {
@@ -23,7 +24,7 @@ describe('nodes', () => {
 
     const controlPointCount = { x: 3, y: 3 }
 
-    const { vertex, fragment } = createProgram((namer) => {
+    const result = createProgram((namer) => {
       const controlPointPositions = uniformArray(
         'vec2',
         namer.uniform('controlPoints'),
@@ -204,8 +205,20 @@ describe('nodes', () => {
       }
     })
 
-    console.log(vertex)
-    console.log()
-    console.log(fragment)
+    console.log(JSON.stringify(result, null, 2))
+  })
+  test.only('varyings work', ({ expect }) => {
+    const program = createProgram((namer) => {
+      const aColor = attribute('vec4', namer.attribute('color'))
+      const vColor = varying('vec4', namer.varying('color'), aColor)
+
+      return {
+        gl_FragColor: output('gl_FragColor', vColor),
+        gl_Position: output('gl_Position', literal('vec4', ['0.0', '0.0', '0.0', '0.0'])),
+      }
+    })
+
+    console.log(JSON.stringify(program, null, 2))
+    expect(3).toBe(3)
   })
 })
