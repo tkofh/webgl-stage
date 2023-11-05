@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.8.0...@webgl-tools/glsl-nodes@0.9.0) (2023-11-05)
+
+### Features
+
+- make additional literal args optional ([4d0eac6](https://github.com/tkofh/webgl-tools/commit/4d0eac665a78574e3efad977dad03889d323188c))
+
 # [0.8.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.7.1...@webgl-tools/glsl-nodes@0.8.0) (2023-11-05)
 
 ### Features
