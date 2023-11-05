@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.9.0...@webgl-tools/glsl-nodes@0.9.1) (2023-11-05)
+
+### Bug Fixes
+
+- allow multiplying a vector by a scalar ([e099137](https://github.com/tkofh/webgl-tools/commit/e099137637db7d3c3ca3bd30f5a5946ee030172b))
+
 # [0.9.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.8.0...@webgl-tools/glsl-nodes@0.9.0) (2023-11-05)
 
 ### Features
