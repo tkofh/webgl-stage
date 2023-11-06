@@ -11,7 +11,7 @@ export const add = <
   type: x.type,
   dependencies: [x, y],
   write: null,
-  expression: `${x.expression} + ${y.expression}`,
+  expression: `(${x.expression} + ${y.expression})`,
 })
 
 export const subtract = <
@@ -25,7 +25,7 @@ export const subtract = <
   type: x.type,
   dependencies: [x, y],
   write: null,
-  expression: `${x.expression} - ${y.expression}`,
+  expression: `(${x.expression} - ${y.expression})`,
 })
 export const multiply = <
   TValueX extends DataNode<ArithmeticDataType>,
@@ -38,7 +38,7 @@ export const multiply = <
   type: x.type,
   dependencies: [x, y],
   write: null,
-  expression: `${x.expression} * ${y.expression}`,
+  expression: `(${x.expression} * ${y.expression})`,
 })
 
 export const divide = <
@@ -52,5 +52,5 @@ export const divide = <
   type: x.type,
   dependencies: [x, y],
   write: null,
-  expression: `${x.expression} / ${y.expression}`,
+  expression: `(${x.expression} / ${y.expression})`,
 })
