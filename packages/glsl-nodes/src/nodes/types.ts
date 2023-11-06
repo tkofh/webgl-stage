@@ -40,6 +40,19 @@ export type AccessableDataType =
   | 'mat3'
   | 'mat4'
 
+export interface ArithmeticCompatibleTypes {
+  float: 'float' | 'vec2' | 'vec3' | 'vec4' | 'mat2' | 'mat3' | 'mat4'
+  int: 'int'
+  vec2: 'float' | 'vec2' | 'mat2'
+  vec3: 'float' | 'vec3' | 'mat3'
+  vec4: 'float' | 'vec4' | 'mat4'
+  mat2: 'float' | 'vec2' | 'mat2'
+  mat3: 'float' | 'vec3' | 'mat3'
+  mat4: 'float' | 'vec4' | 'mat4'
+}
+
+export type ArithmeticDataType = keyof ArithmeticCompatibleTypes
+
 export type StorageType = 'attribute' | 'varying' | 'uniform' | 'local' | 'literal'
 
 export type WritableStorageType = 'varying' | 'local'

@@ -1,6 +1,9 @@
-import type { DataType, DataNode } from './types'
+import type { DataNode, ArithmeticCompatibleTypes, ArithmeticDataType } from './types'
 
-export const add = <TValueX extends DataNode<DataType>, TValueY extends DataNode<TValueX['type']>>(
+export const add = <
+  TValueX extends DataNode<ArithmeticDataType>,
+  TValueY extends DataNode<ArithmeticCompatibleTypes[TValueX['type']]>
+>(
   x: TValueX,
   y: TValueY
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
@@ -12,8 +15,8 @@ export const add = <TValueX extends DataNode<DataType>, TValueY extends DataNode
 })
 
 export const subtract = <
-  TValueX extends DataNode<DataType>,
-  TValueY extends DataNode<TValueX['type']>
+  TValueX extends DataNode<ArithmeticDataType>,
+  TValueY extends DataNode<ArithmeticCompatibleTypes[TValueX['type']]>
 >(
   x: TValueX,
   y: TValueY
@@ -25,17 +28,8 @@ export const subtract = <
   expression: `${x.expression} - ${y.expression}`,
 })
 export const multiply = <
-  TValueX extends DataNode<DataType>,
-  TValueY extends DataNode<
-    | TValueX['type']
-    | (TValueX['type'] extends 'vec2'
-        ? 'mat2' | 'float'
-        : TValueX['type'] extends 'vec3'
-        ? 'mat3' | 'float'
-        : TValueX['type'] extends 'vec4'
-        ? 'mat4' | 'float'
-        : never)
-  >
+  TValueX extends DataNode<ArithmeticDataType>,
+  TValueY extends DataNode<ArithmeticCompatibleTypes[TValueX['type']]>
 >(
   x: TValueX,
   y: TValueY
@@ -48,8 +42,8 @@ export const multiply = <
 })
 
 export const divide = <
-  TValueX extends DataNode<DataType>,
-  TValueY extends DataNode<TValueX['type']>
+  TValueX extends DataNode<ArithmeticDataType>,
+  TValueY extends DataNode<ArithmeticCompatibleTypes[TValueX['type']]>
 >(
   x: TValueX,
   y: TValueY
