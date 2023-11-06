@@ -15,6 +15,42 @@ export interface ProgramOptions {
 
 const isDataNode = (node: Node): node is DataNode<DataType> => 'storage' in node
 
+const compareNodeOrder = (a: Node | undefined, b: Node | undefined): number => {
+  const aComesFirst = -1
+  const bComesFirst = 1
+
+  if (a == null) {
+    return bComesFirst
+  }
+  if (b == null) {
+    return aComesFirst
+  }
+
+  if (a.dependencies.size > 0) {
+    if (b.dependencies.size > 0) {
+      if (a.dependencies.has(b)) {
+        return bComesFirst
+      }
+      if (b.dependencies.has(a)) {
+        return aComesFirst
+      }
+
+      return compareNodeOrder(
+        Array.from(a.dependencies).reduce((largest, current) =>
+          largest.dependencies.size > current.dependencies.size ? largest : current
+        ),
+        Array.from(b.dependencies).reduce((largest, current) =>
+          largest.dependencies.size > current.dependencies.size ? largest : current
+        )
+      )
+    } else {
+      return bComesFirst
+    }
+  } else {
+    return aComesFirst
+  }
+}
+
 export const createProgram = (
   setup: ProgramSetup | ProgramSetupResult,
   options?: ProgramOptions
@@ -26,37 +62,34 @@ export const createProgram = (
 
   const result = typeof setup === 'function' ? setup(namer) : setup
 
-  const fragmentWritten = new Set<Node>()
-  const fragmentQueue: Node[] = [result.gl_FragColor]
+  const fragmentQueue: Node[] = [result.gl_FragColor, ...result.gl_FragColor.dependencies]
+  const vertexQueue: Node[] = [result.gl_Position, ...result.gl_Position.dependencies]
 
-  const vertexWritten = new Set<Node>()
-  const vertexQueue: Node[] = [result.gl_Position]
-
+  fragmentQueue.sort(compareNodeOrder)
   while (fragmentQueue.length > 0) {
     const current = fragmentQueue.pop()!
-    if (!fragmentWritten.has(current)) {
-      fragmentWritten.add(current)
 
-      if (isDataNode(current)) {
-        if (current.storage === 'varying') {
-          vertexQueue.push(current)
+    if (isDataNode(current)) {
+      if (current.storage === 'varying') {
+        vertexQueue.push(current)
+        for (const dependency of current.dependencies) {
+          if (!vertexQueue.includes(dependency)) {
+            vertexQueue.push(dependency)
+          }
         }
       }
-
-      current.write?.(fragment)
     }
-    fragmentQueue.unshift(...current.dependencies)
+
+    current.write?.(fragment)
   }
 
   fragment.addGlobal(`precision ${options?.precision ?? 'mediump'} float;`)
 
+  vertexQueue.sort(compareNodeOrder)
   while (vertexQueue.length > 0) {
     const current = vertexQueue.pop()!
-    if (!vertexWritten.has(current)) {
-      vertexWritten.add(current)
-      current.write?.(vertex)
-    }
-    vertexQueue.unshift(...current.dependencies)
+
+    current.write?.(vertex)
   }
 
   return {

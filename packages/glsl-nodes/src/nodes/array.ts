@@ -1,5 +1,5 @@
 import { literal } from './data'
-import type { ArrayNode, DataNode, DataType, DataTypeLiteralParams } from './types'
+import type { ArrayNode, DataNode, DataType, DataTypeLiteralParams, Node } from './types'
 
 export const attributeArray = <TDataType extends DataType>(
   dataType: TDataType,
@@ -10,7 +10,7 @@ export const attributeArray = <TDataType extends DataType>(
   dataType,
   length,
   expression: name,
-  dependencies: [],
+  dependencies: new Set([]),
   write: ({ addGlobal }) => {
     addGlobal(`attribute ${dataType} ${name}[${length}];`)
   },
@@ -25,7 +25,7 @@ export const uniformArray = <TDataType extends DataType>(
   dataType,
   length,
   expression: name,
-  dependencies: [],
+  dependencies: new Set([]),
   write: ({ addGlobal }) => {
     addGlobal(`uniform ${dataType} ${name}[${length}];`)
   },
@@ -40,7 +40,7 @@ export const varyingArray = <TDataType extends DataType>(
   dataType,
   length,
   expression: name,
-  dependencies: [],
+  dependencies: new Set([]),
   write: ({ addGlobal }) => {
     addGlobal(`varying ${dataType} ${name}[${length}];`)
   },
@@ -55,7 +55,7 @@ export const variableArray = <TDataType extends DataType, TValue extends ArrayNo
   dataType,
   length: value.length,
   expression: name,
-  dependencies: [value],
+  dependencies: new Set([value, ...value.dependencies]),
   write: ({ addMainBody }) => {
     addMainBody(`${dataType} ${name}[${length}] = ${value.expression};`)
   },
@@ -70,7 +70,7 @@ export const constantArray = <TDataType extends DataType, TValue extends ArrayNo
   dataType,
   length: value.length,
   expression: name,
-  dependencies: [value],
+  dependencies: new Set([value, ...value.dependencies]),
   write: ({ addMainBody }) => {
     addMainBody(
       `const ${dataType} ${name}[${length}] = ${dataType}[${length}](${value.expression});`
@@ -95,15 +95,15 @@ export const literalArray = <
         : never
       : never)
 > => {
-  const dependencies: DataNode<TDataType>[] = []
+  const dependencies: Node[] = []
   const valueExpressions: string[] = []
   for (const value of values) {
     if (Array.isArray(value)) {
       const arrayValue = literal(dataType, value)
-      dependencies.push(arrayValue)
+      dependencies.push(arrayValue, ...arrayValue.dependencies)
       valueExpressions.push(arrayValue.expression)
     } else if (typeof value === 'object') {
-      dependencies.push(value)
+      dependencies.push(value, ...value.dependencies)
       valueExpressions.push(value.expression)
     } else {
       valueExpressions.push(value)
@@ -116,7 +116,7 @@ export const literalArray = <
     length: values.length,
     write: null,
     expression: `${dataType}[${values.length}](${valueExpressions.join(', ')})`,
-    dependencies,
+    dependencies: new Set(dependencies),
   }
 }
 
@@ -126,7 +126,7 @@ export const accessArray = <TValue extends ArrayNode<DataType>>(
 ): DataNode<TValue['dataType'], 'literal' | TValue['storage']> => ({
   type: value.dataType,
   storage: 'literal',
-  dependencies: [value, access],
+  dependencies: new Set([value, ...value.dependencies, access, ...access.dependencies]),
   write: null,
   expression: `${value.expression}[${access.expression}]`,
 })

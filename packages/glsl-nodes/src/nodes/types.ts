@@ -1,7 +1,7 @@
 import type { Writer } from '../writer'
 
 export interface Node {
-  dependencies: Node[]
+  dependencies: Set<Node>
   write: null | ((writer: Writer) => void)
 }
 

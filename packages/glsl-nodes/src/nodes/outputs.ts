@@ -9,7 +9,7 @@ export const output = <TOutput extends OutputType>(
   target: TOutput,
   value: DataNode<DataType, OutputToAllowedStorage[TOutput]>
 ): OutputNode<TOutput> => ({
-  dependencies: [value],
+  dependencies: new Set([value, ...value.dependencies]),
   target,
   write: ({ addMainBody }) => {
     addMainBody(`${target} = ${value.expression};`)

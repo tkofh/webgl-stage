@@ -3,6 +3,7 @@ import type {
   DataNode,
   DataType,
   DataTypeLiteralParams,
+  Node,
   SwizzleableDataType,
 } from './types'
 
@@ -13,7 +14,7 @@ export const attribute = <TType extends DataType>(
   storage: 'attribute',
   type,
   expression: name,
-  dependencies: [],
+  dependencies: new Set([]),
   write: ({ addGlobal, mode }) => {
     if (mode === 'vertex') {
       addGlobal(`attribute ${type} ${name};`)
@@ -28,7 +29,7 @@ export const uniform = <TType extends DataType>(
   storage: 'uniform',
   type,
   expression: name,
-  dependencies: [],
+  dependencies: new Set([]),
   write: ({ addGlobal }) => {
     addGlobal(`uniform ${type} ${name};`)
   },
@@ -42,7 +43,7 @@ export const varying = <TType extends DataType>(
   storage: 'varying',
   type,
   expression: name,
-  dependencies: [value],
+  dependencies: new Set([value, ...value.dependencies]),
   write: ({ addGlobal, addMainBody, mode }) => {
     addGlobal(`varying ${type} ${name};`)
 
@@ -72,7 +73,7 @@ export const variable = <
     type,
     storage: 'local',
     expression: name,
-    dependencies: [valueNode],
+    dependencies: new Set([valueNode, ...valueNode.dependencies]),
     write: ({ addMainBody }) => {
       addMainBody(`${type} ${name} = ${valueNode.expression};`)
     },
@@ -99,7 +100,7 @@ export const constant = <
     type,
     storage: 'local',
     expression: name,
-    dependencies: [valueNode],
+    dependencies: new Set([valueNode, ...valueNode.dependencies]),
     write: ({ addGlobal }) => {
       addGlobal(`const ${type} ${name} = ${valueNode.expression};`)
     },
@@ -113,11 +114,11 @@ export const literal = <TType extends DataType, TValues extends DataTypeLiteralP
   TType,
   'literal' | (TValues[number] extends DataNode<DataType, infer TStorage> ? TStorage : never)
 > => {
-  const dependencies: DataNode<DataType>[] = []
+  const dependencies: Node[] = []
   const valueExpressions: string[] = []
   for (const value of values) {
     if (typeof value === 'object') {
-      dependencies.push(value)
+      dependencies.push(value, ...value.dependencies)
       valueExpressions.push(value.expression)
     } else if (value != null) {
       valueExpressions.push(value)
@@ -126,7 +127,7 @@ export const literal = <TType extends DataType, TValues extends DataTypeLiteralP
 
   return {
     type,
-    dependencies,
+    dependencies: new Set(dependencies),
     write: null,
     storage: 'literal',
     expression:
@@ -144,7 +145,7 @@ export const cast = <
   cast: TCast
 ): DataNode<TCast, 'literal' | TValue['storage']> => ({
   type: cast,
-  dependencies: [value],
+  dependencies: new Set([value, ...value.dependencies]),
   write: null,
   expression: `${cast}(${value.expression})`,
   storage: 'literal',
@@ -199,7 +200,7 @@ export const swizzle = <
   type: `${value.type.replace(/[234]/, '')}${
     swizzle.length
   }` as SwizzleOutputMap[TValue['type']][TOutputLength],
-  dependencies: [value],
+  dependencies: new Set([value, ...value.dependencies]),
   write: null,
   expression: `${value.expression}.${swizzle}`,
   storage: 'literal',
@@ -269,7 +270,7 @@ export const access = <
       : AccessScalarMap[TValue['type']]
     : AccessScalarMap[TValue['type']],
   storage: 'literal',
-  dependencies: [value],
+  dependencies: new Set([value, ...value.dependencies]),
   write: null,
   expression: `${value.expression}${access}`,
 })

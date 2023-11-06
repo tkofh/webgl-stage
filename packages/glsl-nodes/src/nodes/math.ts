@@ -9,7 +9,7 @@ export const add = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: [x, y],
+  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
   write: null,
   expression: `(${x.expression} + ${y.expression})`,
 })
@@ -23,7 +23,7 @@ export const subtract = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: [x, y],
+  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
   write: null,
   expression: `(${x.expression} - ${y.expression})`,
 })
@@ -36,7 +36,7 @@ export const multiply = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: [x, y],
+  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
   write: null,
   expression: `(${x.expression} * ${y.expression})`,
 })
@@ -50,7 +50,7 @@ export const divide = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: [x, y],
+  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
   write: null,
   expression: `(${x.expression} / ${y.expression})`,
 })
