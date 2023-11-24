@@ -17,13 +17,7 @@ export const texture2D = <
 > => ({
   storage: 'literal',
   type: 'vec4',
-  dependencies: new Set([
-    sampler,
-    ...sampler.dependencies,
-    coord,
-    ...coord.dependencies,
-    ...(bias ? [bias, ...bias.dependencies] : []),
-  ]),
+  dependencies: [sampler, coord, ...(bias ? [bias] : [])],
   write: null,
   expression: `texture2D(${sampler.expression}, ${coord.expression}${
     bias ? `, ${bias.expression}` : ''
@@ -47,13 +41,7 @@ export const textureCube = <
 > => ({
   storage: 'literal',
   type: 'vec4',
-  dependencies: new Set([
-    sampler,
-    ...sampler.dependencies,
-    coord,
-    ...coord.dependencies,
-    ...(bias ? [bias, ...bias.dependencies] : []),
-  ]),
+  dependencies: [sampler, coord, ...(bias ? [bias] : [])],
   write: null,
   expression: `textureCube(${sampler.expression}, ${coord.expression}${
     bias ? `, ${bias.expression}` : ''

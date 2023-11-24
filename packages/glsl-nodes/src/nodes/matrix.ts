@@ -9,7 +9,7 @@ export const matrixCompMult = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `matrixCompMult(${x.expression}, ${y.expression})`,
 })

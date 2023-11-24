@@ -14,7 +14,7 @@ export const attribute = <TType extends DataType>(
   storage: 'attribute',
   type,
   expression: name,
-  dependencies: new Set([]),
+  dependencies: [],
   write: ({ addGlobal, mode }) => {
     if (mode === 'vertex') {
       addGlobal(`attribute ${type} ${name};`)
@@ -29,7 +29,7 @@ export const uniform = <TType extends DataType>(
   storage: 'uniform',
   type,
   expression: name,
-  dependencies: new Set([]),
+  dependencies: [],
   write: ({ addGlobal }) => {
     addGlobal(`uniform ${type} ${name};`)
   },
@@ -43,7 +43,7 @@ export const varying = <TType extends DataType>(
   storage: 'varying',
   type,
   expression: name,
-  dependencies: new Set([value, ...value.dependencies]),
+  dependencies: [value],
   write: ({ addGlobal, addMainBody, mode }) => {
     addGlobal(`varying ${type} ${name};`)
 
@@ -73,7 +73,7 @@ export const variable = <
     type,
     storage: 'local',
     expression: name,
-    dependencies: new Set([valueNode, ...valueNode.dependencies]),
+    dependencies: [valueNode],
     write: ({ addMainBody }) => {
       addMainBody(`${type} ${name} = ${valueNode.expression};`)
     },
@@ -100,7 +100,7 @@ export const constant = <
     type,
     storage: 'local',
     expression: name,
-    dependencies: new Set([valueNode, ...valueNode.dependencies]),
+    dependencies: [valueNode],
     write: ({ addGlobal }) => {
       addGlobal(`const ${type} ${name} = ${valueNode.expression};`)
     },
@@ -127,7 +127,7 @@ export const literal = <TType extends DataType, TValues extends DataTypeLiteralP
 
   return {
     type,
-    dependencies: new Set(dependencies),
+    dependencies,
     write: null,
     storage: 'literal',
     expression:
@@ -145,7 +145,7 @@ export const cast = <
   cast: TCast
 ): DataNode<TCast, 'literal' | TValue['storage']> => ({
   type: cast,
-  dependencies: new Set([value, ...value.dependencies]),
+  dependencies: [value],
   write: null,
   expression: `${cast}(${value.expression})`,
   storage: 'literal',
@@ -200,7 +200,7 @@ export const swizzle = <
   type: `${value.type.replace(/[234]/, '')}${
     swizzle.length
   }` as SwizzleOutputMap[TValue['type']][TOutputLength],
-  dependencies: new Set([value, ...value.dependencies]),
+  dependencies: [value],
   write: null,
   expression: `${value.expression}.${swizzle}`,
   storage: 'literal',
@@ -270,7 +270,7 @@ export const access = <
       : AccessScalarMap[TValue['type']]
     : AccessScalarMap[TValue['type']],
   storage: 'literal',
-  dependencies: new Set([value, ...value.dependencies]),
+  dependencies: [value],
   write: null,
   expression: `${value.expression}${access}`,
 })

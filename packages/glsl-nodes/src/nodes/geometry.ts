@@ -5,7 +5,7 @@ export const length = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `length(${x.expression})`,
 })
@@ -19,7 +19,7 @@ export const distance = <
 ): DataNode<TPoint0['type'], 'literal' | TPoint0['storage'] | TPoint1['storage']> => ({
   storage: 'literal',
   type: p0.type,
-  dependencies: new Set([p0, ...p0.dependencies, p1, ...p1.dependencies]),
+  dependencies: [p0, p1],
   write: null,
   expression: `distance(${p0.expression}, ${p1.expression})`,
 })
@@ -33,7 +33,7 @@ export const dot = <
 ): DataNode<'float', 'literal' | TPoint0['storage'] | TPoint1['storage']> => ({
   storage: 'literal',
   type: 'float',
-  dependencies: new Set([p0, ...p0.dependencies, p1, ...p1.dependencies]),
+  dependencies: [p0, p1],
   write: null,
   expression: `dot(${p0.expression}, ${p1.expression})`,
 })
@@ -44,7 +44,7 @@ export const cross = <TPoint extends DataNode<'vec3'>>(
 ): DataNode<'vec3', 'literal' | TPoint['storage']> => ({
   storage: 'literal',
   type: p0.type,
-  dependencies: new Set([p0, ...p0.dependencies, p1, ...p1.dependencies]),
+  dependencies: [p0, p1],
   write: null,
   expression: `cross(${p0.expression}, ${p1.expression})`,
 })
@@ -54,7 +54,7 @@ export const normalize = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `normalize(${x.expression})`,
 })
@@ -68,7 +68,7 @@ export const reflect = <
 ): DataNode<TIncident['type'], 'literal' | TIncident['storage'] | TNormal['storage']> => ({
   storage: 'literal',
   type: incident.type,
-  dependencies: new Set([incident, ...incident.dependencies, normal, ...normal.dependencies]),
+  dependencies: [incident, normal],
   write: null,
   expression: `reflect(${incident.expression}, ${normal.expression})`,
 })
@@ -87,14 +87,7 @@ export const refract = <
 > => ({
   storage: 'literal',
   type: incident.type,
-  dependencies: new Set([
-    incident,
-    ...incident.dependencies,
-    normal,
-    ...normal.dependencies,
-    eta,
-    ...eta.dependencies,
-  ]),
+  dependencies: [incident, normal, eta],
   write: null,
   expression: `refract(${incident.expression}, ${normal.expression}, ${eta.expression})`,
 })

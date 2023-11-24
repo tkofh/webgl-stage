@@ -10,7 +10,7 @@ export const attributeArray = <TDataType extends DataType>(
   dataType,
   length,
   expression: name,
-  dependencies: new Set([]),
+  dependencies: [],
   write: ({ addGlobal }) => {
     addGlobal(`attribute ${dataType} ${name}[${length}];`)
   },
@@ -25,7 +25,7 @@ export const uniformArray = <TDataType extends DataType>(
   dataType,
   length,
   expression: name,
-  dependencies: new Set([]),
+  dependencies: [],
   write: ({ addGlobal }) => {
     addGlobal(`uniform ${dataType} ${name}[${length}];`)
   },
@@ -40,7 +40,7 @@ export const varyingArray = <TDataType extends DataType>(
   dataType,
   length,
   expression: name,
-  dependencies: new Set([]),
+  dependencies: [],
   write: ({ addGlobal }) => {
     addGlobal(`varying ${dataType} ${name}[${length}];`)
   },
@@ -55,7 +55,7 @@ export const variableArray = <TDataType extends DataType, TValue extends ArrayNo
   dataType,
   length: value.length,
   expression: name,
-  dependencies: new Set([value, ...value.dependencies]),
+  dependencies: [value],
   write: ({ addMainBody }) => {
     addMainBody(`${dataType} ${name}[${length}] = ${value.expression};`)
   },
@@ -70,7 +70,7 @@ export const constantArray = <TDataType extends DataType, TValue extends ArrayNo
   dataType,
   length: value.length,
   expression: name,
-  dependencies: new Set([value, ...value.dependencies]),
+  dependencies: [value],
   write: ({ addMainBody }) => {
     addMainBody(
       `const ${dataType} ${name}[${length}] = ${dataType}[${length}](${value.expression});`
@@ -116,7 +116,7 @@ export const literalArray = <
     length: values.length,
     write: null,
     expression: `${dataType}[${values.length}](${valueExpressions.join(', ')})`,
-    dependencies: new Set(dependencies),
+    dependencies,
   }
 }
 
@@ -126,7 +126,7 @@ export const accessArray = <TValue extends ArrayNode<DataType>>(
 ): DataNode<TValue['dataType'], 'literal' | TValue['storage']> => ({
   type: value.dataType,
   storage: 'literal',
-  dependencies: new Set([value, ...value.dependencies, access, ...access.dependencies]),
+  dependencies: [value, access],
   write: null,
   expression: `${value.expression}[${access.expression}]`,
 })

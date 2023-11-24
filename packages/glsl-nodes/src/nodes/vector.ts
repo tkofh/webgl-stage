@@ -12,7 +12,7 @@ export const lessThan = <
 > => ({
   storage: 'literal',
   type: `b${x.type.replace('i', '')}` as NumberVecToBoolVec[TValueX['type']],
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `lessThan(${x.expression}, ${y.expression})`,
 })
@@ -29,7 +29,7 @@ export const lessThanEqual = <
 > => ({
   storage: 'literal',
   type: `b${x.type.replace('i', '')}` as NumberVecToBoolVec[TValueX['type']],
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `lessThanEqual(${x.expression}, ${y.expression})`,
 })
@@ -46,7 +46,7 @@ export const greaterThan = <
 > => ({
   storage: 'literal',
   type: `b${x.type.replace('i', '')}` as NumberVecToBoolVec[TValueX['type']],
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `greaterThan(${x.expression}, ${y.expression})`,
 })
@@ -63,7 +63,7 @@ export const greaterThanEqual = <
 > => ({
   storage: 'literal',
   type: `b${x.type.replace('i', '')}` as NumberVecToBoolVec[TValueX['type']],
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `greaterThanEqual(${x.expression}, ${y.expression})`,
 })
@@ -80,7 +80,7 @@ export const equal = <
 > => ({
   storage: 'literal',
   type: `b${x.type.replace('i', '')}` as NumberVecToBoolVec[TValueX['type']],
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `equal(${x.expression}, ${y.expression})`,
 })
@@ -97,7 +97,7 @@ export const notEqual = <
 > => ({
   storage: 'literal',
   type: `b${x.type.replace('i', '')}` as NumberVecToBoolVec[TValueX['type']],
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `notEqual(${x.expression}, ${y.expression})`,
 })
@@ -107,7 +107,7 @@ export const any = <TValueX extends DataNode<BoolVecType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `any(${x.expression})`,
 })
@@ -117,7 +117,7 @@ export const all = <TValueX extends DataNode<BoolVecType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `all(${x.expression})`,
 })
@@ -127,7 +127,7 @@ export const not = <TValueX extends DataNode<BoolVecType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `not(${x.expression})`,
 })

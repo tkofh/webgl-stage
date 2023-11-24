@@ -14,10 +14,7 @@ export const raw = <TType extends DataType, TStorage extends StorageType>(
 ): DataNode<TType, TStorage> => ({
   type,
   storage,
-  dependencies: new Set([
-    ...dependencies,
-    ...dependencies.flatMap((dep) => Array.from(dep.dependencies)),
-  ]),
+  dependencies,
   expression,
   write: (writer) => {
     if (source.global) {

@@ -207,10 +207,16 @@ describe('nodes', () => {
 
     console.log(JSON.stringify(result, null, 2))
   })
-  test.only('varyings work', ({ expect }) => {
+  test('varyings work', ({ expect }) => {
     const program = createProgram((namer) => {
       const aColor = attribute('vec4', namer.attribute('color'))
-      const vColor = varying('vec4', namer.varying('color'), aColor)
+
+      const calculated = variable(
+        'vec4',
+        namer.variable('calculation'),
+        multiply(aColor, literal('vec4', ['1.0']))
+      )
+      const vColor = varying('vec4', namer.varying('color'), calculated)
 
       return {
         gl_FragColor: output('gl_FragColor', vColor),

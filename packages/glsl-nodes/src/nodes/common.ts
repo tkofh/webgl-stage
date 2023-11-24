@@ -5,7 +5,7 @@ export const abs = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `abs(${x.expression})`,
 })
@@ -15,7 +15,7 @@ export const sign = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `sign(${x.expression})`,
 })
@@ -25,7 +25,7 @@ export const floor = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `floor(${x.expression})`,
 })
@@ -35,7 +35,7 @@ export const ceil = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `ceil(${x.expression})`,
 })
@@ -45,7 +45,7 @@ export const fract = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `fract(${x.expression})`,
 })
@@ -55,7 +55,7 @@ export const mod = <TValueX extends DataNode<FloatDataType>>(
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies]),
+  dependencies: [x],
   write: null,
   expression: `mod(${x.expression})`,
 })
@@ -69,7 +69,7 @@ export const min = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `min(${x.expression}, ${y.expression})`,
 })
@@ -83,7 +83,7 @@ export const max = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueY['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies]),
+  dependencies: [x, y],
   write: null,
   expression: `max(${x.expression}, ${y.expression})`,
 })
@@ -98,7 +98,7 @@ export const clamp = <
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage'] | TValueEdge['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies, min, ...min.dependencies, max, ...max.dependencies]),
+  dependencies: [x, min, max],
   write: null,
   expression: `clamp(${x.expression}, ${min.expression}, ${max.expression})`,
 })
@@ -117,7 +117,7 @@ export const mix = <
 > => ({
   storage: 'literal',
   type: x.type,
-  dependencies: new Set([x, ...x.dependencies, y, ...y.dependencies, a, ...a.dependencies]),
+  dependencies: [x, y, a],
   write: null,
   expression: `mix(${x.expression}, ${y.expression}, ${a.expression})`,
 })
@@ -131,7 +131,7 @@ export const step = <
 ): DataNode<TValue['type'], 'literal' | TValue['storage'] | TEdge['storage']> => ({
   storage: 'literal',
   type: value.type,
-  dependencies: new Set([edge, ...edge.dependencies, value, ...value.dependencies]),
+  dependencies: [edge, value],
   write: null,
   expression: `step(${edge.expression}, ${value.expression})`,
 })
@@ -150,14 +150,7 @@ export const smoothstep = <
 > => ({
   storage: 'literal',
   type: value.type,
-  dependencies: new Set([
-    edge0,
-    ...edge0.dependencies,
-    edge1,
-    ...edge1.dependencies,
-    value,
-    ...value.dependencies,
-  ]),
+  dependencies: [edge0, edge1, value],
   write: null,
   expression: `smoothstep(${edge0.expression}, ${edge1.expression}, ${value.expression})`,
 })

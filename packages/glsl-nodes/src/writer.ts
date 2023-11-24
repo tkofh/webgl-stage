@@ -18,22 +18,11 @@ export const createWriter = (mode: 'vertex' | 'fragment'): Writer => {
   return {
     mode,
     addGlobal: (glsl) => {
-      globals.unshift(glsl)
+      globals.push(glsl)
     },
-    // addFunction: (name, returnType, parameters) => {
-    //   functions.set(name, [`${returnType} ${name}(${parameters}) {`])
-    //   functionOrder.push(name)
-    // },
-    // addFunctionBody: (functionName, glsl) => {
-    //   const func = functions.get(functionName)
-    //   if(!func) {
-    //     throw new Error(`Unknown function ${functionName}`)
-    //   }
 
-    //   func.push(glsl)
-    // },
     addMainBody: (glsl) => {
-      mainBody.unshift(glsl)
+      mainBody.push(glsl)
     },
     compile: () => [...globals, `void main() {`, ...mainBody, `}`].join('\n'),
   }

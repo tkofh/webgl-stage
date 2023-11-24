@@ -22,12 +22,12 @@ describe('writer', () => {
     const fragmentShader = fragmentWriter.compile()
 
     expect(vertexShader).toBe(outdent`
-        attribute vec3 a_pos;
-        attribute vec2 a_uv;
         varying vec2 v_uv;
+        attribute vec2 a_uv;
+        attribute vec3 a_pos;
         void main() {
-        gl_Position = vec4(a_pos, 1.0);
         v_uv = a_uv;
+        gl_Position = vec4(a_pos, 1.0);
         }
       `)
     expect(fragmentShader).toBe(outdent`
