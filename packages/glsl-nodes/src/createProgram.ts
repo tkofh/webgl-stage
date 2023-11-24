@@ -122,10 +122,10 @@ export const createProgram = (
     vertexDiscoveryQueue.push(...current.dependencies)
   }
 
+  fragment.addGlobal(`precision ${options?.precision ?? 'mediump'} float;`)
   for (const node of Array.from(fragmentNodes).sort(compareNodeOrder)) {
     node.write?.(fragment)
   }
-  fragment.addGlobal(`precision ${options?.precision ?? 'mediump'} float;`)
 
   for (const node of Array.from(vertexNodes).sort(compareNodeOrder)) {
     node.write?.(vertex)
