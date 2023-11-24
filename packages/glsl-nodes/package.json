@@ -1,6 +1,6 @@
 {
   "name": "@webgl-tools/glsl-nodes",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Node and layer based library for composing glsl programs",
   "keywords": [],
   "author": "Tim Morris <timthewebguy@gmail.com>",
