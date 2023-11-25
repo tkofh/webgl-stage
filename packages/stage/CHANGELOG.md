@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/stage@0.2.1...@webgl-tools/stage@0.3.0) (2023-11-25)
+
+### Features
+
+- expose gl ([d3be5b6](https://github.com/tkofh/webgl-tools/commit/d3be5b686fb6764e0916da448dcef88209ed912d))
+
 ## [0.2.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/stage@0.2.0...@webgl-tools/stage@0.2.1) (2023-01-04)
 
 ### Bug Fixes
