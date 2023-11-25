@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.11.0...@webgl-tools/glsl-nodes@0.12.0) (2023-11-25)
+
+### Features
+
+- add debug option ([d926fb7](https://github.com/tkofh/webgl-tools/commit/d926fb74c98571eb23d0a1aa1afd6daf7e37b655))
+
 # [0.11.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.10.3...@webgl-tools/glsl-nodes@0.11.0) (2023-11-25)
 
 ### Features
