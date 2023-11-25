@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { collectDependencies } from './helpers'
 import type { Namer } from './namer'
 import { createNamer } from './namer'
@@ -11,6 +12,7 @@ type ProgramSetupResult = {
 type ProgramSetup = (namer: Namer) => ProgramSetupResult
 
 export interface ProgramOptions {
+  debug?: boolean
   precision?: 'lowp' | 'mediump' | 'highp'
 }
 
@@ -18,6 +20,12 @@ export const createProgram = (
   setup: ProgramSetup | ProgramSetupResult,
   options?: ProgramOptions
 ) => {
+  const debug = options?.debug ?? false
+
+  if (debug) {
+    console.log('createProgram', setup, options)
+    console.time('program created')
+  }
   const fragment = createWriter('fragment')
   const vertex = createWriter('vertex')
 
@@ -25,7 +33,19 @@ export const createProgram = (
 
   const result = typeof setup === 'function' ? setup(namer) : setup
 
+  if (debug) {
+    console.log('result', result)
+    console.time('collected unique nodes')
+  }
+
   const uniqueNodes = collectDependencies(result.gl_FragColor, result.gl_Position)
+
+  if (debug) {
+    console.timeEnd('collected unique nodes')
+    console.log('uniqueNodes', uniqueNodes)
+
+    console.time('dependencies resolved')
+  }
 
   const dependencies = new Map<Node, Set<Node>>()
   const dependencyResolutionQueue = Array.from(uniqueNodes).sort(
@@ -51,6 +71,10 @@ export const createProgram = (
     if (didResolve) {
       dependencies.set(current, currentDependencies)
     }
+  }
+
+  if (debug) {
+    console.timeEnd('dependencies resolved')
   }
 
   const isDataNode = (node: Node): node is DataNode<DataType> => 'storage' in node
@@ -100,6 +124,10 @@ export const createProgram = (
   const fragmentNodes = new Set<Node>()
   const vertexNodes = new Set<Node>()
 
+  if (debug) {
+    console.time('fragment nodes collected')
+  }
+
   while (fragmentDiscoveryQueue.length > 0) {
     const current = fragmentDiscoveryQueue.pop()!
     fragmentNodes.add(current)
@@ -111,10 +139,19 @@ export const createProgram = (
     }
   }
 
+  if (debug) {
+    console.timeEnd('fragment nodes collected')
+    console.time('vertex nodes collected')
+  }
+
   while (vertexDiscoveryQueue.length > 0) {
     const current = vertexDiscoveryQueue.pop()!
     vertexNodes.add(current)
     vertexDiscoveryQueue.push(...current.dependencies)
+  }
+
+  if (debug) {
+    console.time('vertex nodes collected')
   }
 
   fragment.addGlobal(`precision ${options?.precision ?? 'mediump'} float;`)
@@ -124,6 +161,10 @@ export const createProgram = (
 
   for (const node of Array.from(vertexNodes).sort(compareNodeOrder)) {
     node.write?.(vertex)
+  }
+
+  if (debug) {
+    console.timeEnd('program created')
   }
 
   return {
