@@ -1,4 +1,5 @@
 {
   "*.md": ["prettier --write"],
-  "*.ts,*.vue,*.js": ["eslint --fix", "prettier --write"]
+  "*.ts": ["eslint --fix", "prettier --write"],
+  "*.js": ["eslint --fix", "prettier --write"]
 }
