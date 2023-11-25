@@ -229,6 +229,7 @@ export const createStage = <TAttributes extends StageAttributes, TUniforms exten
     elements: config.elements,
     vertexShader: config.vertexShader,
     fragmentShader: config.fragmentShader,
+    gl,
 
     resize,
     setAttribute,

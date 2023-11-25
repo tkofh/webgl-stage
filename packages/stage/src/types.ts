@@ -94,6 +94,8 @@ export interface StageEvents<TAttributes extends StageAttributes, TUniforms exte
   [event: string | symbol]: unknown
 }
 
+type StageGL = WebGLRenderingContext | WebGL2RenderingContext
+
 export interface Stage<TAttributes extends StageAttributes, TUniforms extends StageUniforms>
   extends Omit<Emitter<StageEvents<TAttributes, TUniforms>>, 'emit'> {
   readonly canvas: HTMLCanvasElement
@@ -104,6 +106,7 @@ export interface Stage<TAttributes extends StageAttributes, TUniforms extends St
     [TAttribute in keyof TAttributes]: Readonly<TAttributes[TAttribute]>
   }>
   readonly uniforms: Readonly<{ [TUniform in keyof TUniforms]: Readonly<TUniforms[TUniform]> }>
+  readonly gl: StageGL
   readonly setAttribute: <TAttribute extends keyof TAttributes>(
     attribute: TAttribute,
     data: TAttributes[TAttribute]['data']
