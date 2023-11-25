@@ -1,3 +1,4 @@
+import { collectDependencies } from './helpers'
 import type { Namer } from './namer'
 import { createNamer } from './namer'
 import type { DataNode, DataType, Node, OutputNode, OutputType } from './nodes/types'
@@ -24,13 +25,7 @@ export const createProgram = (
 
   const result = typeof setup === 'function' ? setup(namer) : setup
 
-  const uniqueNodes = new Set<Node>()
-  const nodeDiscoveryQueue: Node[] = [result.gl_FragColor, result.gl_Position]
-  while (nodeDiscoveryQueue.length > 0) {
-    const current = nodeDiscoveryQueue.shift()!
-    uniqueNodes.add(current)
-    nodeDiscoveryQueue.push(...current.dependencies)
-  }
+  const uniqueNodes = collectDependencies(result.gl_FragColor, result.gl_Position)
 
   const dependencies = new Map<Node, Set<Node>>()
   const dependencyResolutionQueue = Array.from(uniqueNodes).sort(
@@ -134,5 +129,6 @@ export const createProgram = (
   return {
     vertexShader: vertex.compile(),
     fragmentShader: fragment.compile(),
+    nodes: new WeakSet(uniqueNodes),
   }
 }
