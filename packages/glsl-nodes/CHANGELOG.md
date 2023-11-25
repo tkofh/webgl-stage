@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.2](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.12.1...@webgl-tools/glsl-nodes@0.12.2) (2023-11-25)
+
+### Bug Fixes
+
+- correct data type for ([636eb6a](https://github.com/tkofh/webgl-tools/commit/636eb6a94cc9f19cb7f1e0856a62ed69022074df))
+
 ## [0.12.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.12.0...@webgl-tools/glsl-nodes@0.12.1) (2023-11-25)
 
 ### Performance Improvements
