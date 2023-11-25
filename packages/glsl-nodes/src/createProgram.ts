@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import { collectDependencies } from './helpers'
 import type { Namer } from './namer'
 import { createNamer } from './namer'
 import type { DataNode, DataType, Node, OutputNode, OutputType } from './nodes/types'
@@ -38,7 +37,18 @@ export const createProgram = (
     console.time('collected unique nodes')
   }
 
-  const uniqueNodes = collectDependencies(result.gl_FragColor, result.gl_Position)
+  const uniqueNodes = new Set<Node>()
+  const nodeDiscoveryQueue: Node[] = [result.gl_Position, result.gl_FragColor]
+
+  while (nodeDiscoveryQueue.length > 0) {
+    const current = nodeDiscoveryQueue.shift()!
+    uniqueNodes.add(current)
+    for (const dep of current.dependencies) {
+      if (!uniqueNodes.has(dep)) {
+        nodeDiscoveryQueue.push(dep)
+      }
+    }
+  }
 
   if (debug) {
     console.timeEnd('collected unique nodes')

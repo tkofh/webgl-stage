@@ -1,1 +1,0 @@
-export { collectDependencies } from './collectDependencies'
