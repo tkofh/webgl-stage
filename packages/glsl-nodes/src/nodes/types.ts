@@ -53,6 +53,20 @@ export interface ArithmeticCompatibleTypes {
 
 export type ArithmeticDataType = keyof ArithmeticCompatibleTypes
 
+export interface ComparisonResult {
+  float: 'bool'
+  int: 'bool'
+  vec2: 'bvec2'
+  ivec2: 'bvec2'
+  vec3: 'bvec3'
+  ivec3: 'bvec3'
+  vec4: 'bvec4'
+  ivec4: 'bvec4'
+  bool: 'bool'
+}
+
+export type ComparableTypes = keyof ComparisonResult
+
 export type StorageType = 'attribute' | 'varying' | 'uniform' | 'local' | 'literal'
 
 export type WritableStorageType = 'varying' | 'local'
@@ -154,15 +168,6 @@ export interface ArrayNode<TDataType extends DataType, TStorage extends StorageT
   dataType: TDataType
   length: number
   expression: string
-}
-
-export interface NumberVecToBoolVec {
-  vec2: 'bvec2'
-  vec3: 'bvec3'
-  vec4: 'bvec4'
-  ivec2: 'bvec2'
-  ivec3: 'bvec3'
-  ivec4: 'bvec4'
 }
 
 export type OutputType = 'gl_Position' | 'gl_FragColor' // 'gl_PointSize' | 'gl_PointCoord' | 'gl_FrontFacing' |  'gl_FragCoord'

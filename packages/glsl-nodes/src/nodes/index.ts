@@ -22,6 +22,18 @@ export {
   step,
 } from './common'
 export {
+  all,
+  any,
+  equal,
+  greaterThan,
+  greaterThanEqual,
+  lessThan,
+  lessThanEqual,
+  not,
+  notEqual,
+  ternary,
+} from './control'
+export {
   access,
   attribute,
   cast,
@@ -49,14 +61,3 @@ export type {
   OutputType,
   StorageType,
 } from './types'
-export {
-  all,
-  any,
-  equal,
-  greaterThan,
-  greaterThanEqual,
-  lessThan,
-  lessThanEqual,
-  not,
-  notEqual,
-} from './vector'
