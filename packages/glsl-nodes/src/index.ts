@@ -59,6 +59,7 @@ export {
   subtract,
   swizzle,
   tan,
+  ternary,
   texture2D,
   textureCube,
   uniformArray,
