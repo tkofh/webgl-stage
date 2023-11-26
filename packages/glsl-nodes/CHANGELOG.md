@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.2](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.13.1...@webgl-tools/glsl-nodes@0.13.2) (2023-11-26)
+
+### Bug Fixes
+
+- **types:** correct return for matrix-vector multiplication ([243050c](https://github.com/tkofh/webgl-tools/commit/243050c7e8592f064bbcdd9883deba73ea63664d))
+
 ## [0.13.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.13.0...@webgl-tools/glsl-nodes@0.13.1) (2023-11-26)
 
 ### Bug Fixes
