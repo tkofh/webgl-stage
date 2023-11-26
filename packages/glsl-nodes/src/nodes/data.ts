@@ -154,24 +154,24 @@ export const cast = <
 interface SwizzleOutputMap {
   vec2: ['float', 'vec2', 'vec3', 'vec4']
   ivec2: ['int', 'ivec2', 'ivec3', 'ivec4']
-  uvec2: ['bool', 'uvec2', 'uvec3', 'uvec4']
+  bvec2: ['bool', 'bvec2', 'bvec3', 'bvec4']
   vec3: ['float', 'vec2', 'vec3', 'vec4']
   ivec3: ['int', 'ivec2', 'ivec3', 'ivec4']
-  uvec3: ['bool', 'uvec2', 'uvec3', 'uvec4']
+  bvec3: ['bool', 'bvec2', 'bvec3', 'bvec4']
   vec4: ['float', 'vec2', 'vec3', 'vec4']
   ivec4: ['int', 'ivec2', 'ivec3', 'ivec4']
-  uvec4: ['bool', 'uvec2', 'uvec3', 'uvec4']
+  bvec4: ['bool', 'bvec2', 'bvec3', 'bvec4']
 }
 interface SwizzleComponentMap {
   vec2: 'x' | 'y'
   ivec2: 'x' | 'y'
-  uvec2: 'x' | 'y'
+  bvec2: 'x' | 'y'
   vec3: 'x' | 'y' | 'z'
   ivec3: 'x' | 'y' | 'z'
-  uvec3: 'x' | 'y' | 'z'
+  bvec3: 'x' | 'y' | 'z'
   vec4: 'x' | 'y' | 'z' | 'w'
   ivec4: 'x' | 'y' | 'z' | 'w'
-  uvec4: 'x' | 'y' | 'z' | 'w'
+  bvec4: 'x' | 'y' | 'z' | 'w'
 }
 type SwizzleCombinations<TType extends SwizzleableDataType> =
   | SwizzleComponentMap[TType]
@@ -197,9 +197,15 @@ export const swizzle = <
   value: TValue,
   swizzle: TSwizzle
 ): DataNode<SwizzleOutputMap[TValue['type']][TOutputLength], 'literal' | TValue['storage']> => ({
-  type: `${value.type.replace(/[234]/, '')}${
-    swizzle.length
-  }` as SwizzleOutputMap[TValue['type']][TOutputLength],
+  type: (swizzle.length === 1
+    ? value.type.startsWith('i')
+      ? 'int'
+      : value.type.startsWith('b')
+      ? 'bool'
+      : 'float'
+    : `${value.type.replace(/[234]/, '')}${
+        swizzle.length
+      }`) as SwizzleOutputMap[TValue['type']][TOutputLength],
   dependencies: [value],
   write: null,
   expression: `${value.expression}.${swizzle}`,
