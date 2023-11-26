@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.12.2...@webgl-tools/glsl-nodes@0.13.0) (2023-11-26)
+
+### Features
+
+- add control statements and ternary ([cffcc8a](https://github.com/tkofh/webgl-tools/commit/cffcc8a519f321ad45b08a4b9bb1fab560119e0e))
+
 ## [0.12.2](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.12.1...@webgl-tools/glsl-nodes@0.12.2) (2023-11-25)
 
 ### Bug Fixes
