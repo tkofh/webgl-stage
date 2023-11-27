@@ -174,3 +174,36 @@ export const ternary = <
   type: trueBranch.type,
   write: null,
 })
+
+export const and = <TLeft extends DataNode<'bool'>, TRight extends DataNode<'bool'>>(
+  left: TLeft,
+  right: TRight
+): DataNode<'bool', 'literal' | TLeft['storage'] | TRight['storage']> => ({
+  dependencies: [left, right],
+  expression: `(${left.expression} && ${right.expression})`,
+  storage: 'literal',
+  type: 'bool',
+  write: null,
+})
+
+export const or = <TLeft extends DataNode<'bool'>, TRight extends DataNode<'bool'>>(
+  left: TLeft,
+  right: TRight
+): DataNode<'bool', 'literal' | TLeft['storage'] | TRight['storage']> => ({
+  dependencies: [left, right],
+  expression: `(${left.expression} || ${right.expression})`,
+  storage: 'literal',
+  type: 'bool',
+  write: null,
+})
+
+export const xor = <TLeft extends DataNode<'bool'>, TRight extends DataNode<'bool'>>(
+  left: TLeft,
+  right: TRight
+): DataNode<'bool', 'literal' | TLeft['storage'] | TRight['storage']> => ({
+  dependencies: [left, right],
+  expression: `(${left.expression} ^^ ${right.expression})`,
+  storage: 'literal',
+  type: 'bool',
+  write: null,
+})
