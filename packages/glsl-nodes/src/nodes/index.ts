@@ -23,6 +23,7 @@ export {
 } from './common'
 export {
   all,
+  and,
   any,
   equal,
   greaterThan,
@@ -31,7 +32,9 @@ export {
   lessThanEqual,
   not,
   notEqual,
+  or,
   ternary,
+  xor,
 } from './control'
 export {
   access,
