@@ -51,13 +51,14 @@ export const fract = <TValueX extends DataNode<FloatDataType>>(
 })
 
 export const mod = <TValueX extends DataNode<FloatDataType>>(
-  x: TValueX
+  x: TValueX,
+  y: DataNode<TValueX['type'] | 'float'>
 ): DataNode<TValueX['type'], 'literal' | TValueX['storage']> => ({
   storage: 'literal',
   type: x.type,
-  dependencies: [x],
+  dependencies: [x, y],
   write: null,
-  expression: `mod(${x.expression})`,
+  expression: `mod(${x.expression}, ${y.expression}})`,
 })
 
 export const min = <
