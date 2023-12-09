@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.2](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.14.1...@webgl-tools/glsl-nodes@0.14.2) (2023-12-09)
+
+### Bug Fixes
+
+- add second arg to mod ([edc786e](https://github.com/tkofh/webgl-tools/commit/edc786eb675b876555d3c2ffa610bdbfaba58540))
+
 ## [0.14.1](https://github.com/tkofh/webgl-tools/compare/@webgl-tools/glsl-nodes@0.14.0...@webgl-tools/glsl-nodes@0.14.1) (2023-11-27)
 
 ### Bug Fixes
