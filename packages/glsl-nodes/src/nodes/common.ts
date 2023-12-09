@@ -58,7 +58,7 @@ export const mod = <TValueX extends DataNode<FloatDataType>>(
   type: x.type,
   dependencies: [x, y],
   write: null,
-  expression: `mod(${x.expression}, ${y.expression}})`,
+  expression: `mod(${x.expression}, ${y.expression})`,
 })
 
 export const min = <
